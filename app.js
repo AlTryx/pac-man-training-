@@ -91,10 +91,25 @@ squares[pacmanCurrentIndex].classList.remove('pac-man')
 
 switch (e.key) {
     case 'ArrowLeft':
-         (pacmanCurrentIndex-=1)
-        break
+        if(
+            pacmanCurrentIndex % width !==0 && 
+            !squares[pacmanCurrentIndex - 1].classList.contains('wall') &&
+            !squares[pacmanCurrentIndex - 1].classList.contains('ghost-lair')
+        ) {
+            (pacmanCurrentIndex-=1)    
+        }
+        if (squares[pacmanCurrentIndex -1] === squares[363]) {
+            pacmanCurrentIndex = 391
+        }
+         break
     case 'ArrowRight' :
-        (pacmanCurrentIndex+=1)
+        if(
+            pacmanCurrentIndex % width < width - 1 && 
+            !squares[pacmanCurrentIndex + 1].classList.contains('wall') &&
+            !squares[pacmanCurrentIndex + 1].classList.contains('ghost-lair')
+        ) {
+            (pacmanCurrentIndex+=1)
+        }
         break
     case 'ArrowUp' :
         (pacmanCurrentIndex-= width)
