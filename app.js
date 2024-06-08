@@ -43,11 +43,32 @@ const layout = [
 // 3 - power-pellet
 //4 - empty
 
+
+const squares = []
+
 // create your board
 function createBoard() {
     for (let i = 0; i< layout.length; i++) {
         const square = document.createElement('div')
         grid.appendChild(square)
+        squares.push(square)
+
+        //add layout to the board
+        if(layout[i] === 0) {
+            squares[i].classList.add('pac-dot')
+        }
+        if(layout[i] === 1) {
+            squares[i].classList.add('wall')
+        }
+        if(layout[i] === 2) {
+            squares[i].classList.add('ghost-lair')
+        }
+        if(layout[i] === 3) {
+            squares[i].classList.add('power-pellet')
+        }
+        if(layout[i] === 4) {
+            squares[i].classList.add('empty')
+        }
 
     }
 }
