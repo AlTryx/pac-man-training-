@@ -50,6 +50,7 @@ const squares = []
 function createBoard() {
     for (let i = 0; i< layout.length; i++) {
         const square = document.createElement('div')
+        square.id = i  // to see what index the i is in
         grid.appendChild(square)
         squares.push(square)
 
@@ -75,6 +76,37 @@ function createBoard() {
 createBoard()
 
 
+// create the characters
 
+// draw pac-man
+
+let pacmanCurrentIndex = 490
+squares[pacmanCurrentIndex].classList.add('pac-man')
+
+// move pacman
+
+function movePacman(e) {
+
+squres[pacmanCurrentIndex].classList.remove('pac-man')
+
+switch (e.key) {
+    case 'ArrowLeft':
+         (pacmanCurrentIndex-=1)
+        break
+    case 'ArrowRight' :
+        (pacmanCurrentIndex+=1)
+        break
+    case 'ArrowUp' :
+        (pacmanCurrentIndex-= width)
+        break
+    case 'ArrowDown' :
+        (pacmanCurrentIndex+= width)
+        break
+    
+}
+squres[pacmanCurrentIndex].classList.add('pac-man')
+}
+
+document.addEventListener('keyup',movePacman)
 
 })
