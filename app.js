@@ -87,7 +87,7 @@ squares[pacmanCurrentIndex].classList.add('pac-man')
 
 function movePacman(e) {
 
-squres[pacmanCurrentIndex].classList.remove('pac-man')
+squares[pacmanCurrentIndex].classList.remove('pac-man')
 
 switch (e.key) {
     case 'ArrowLeft':
@@ -104,7 +104,7 @@ switch (e.key) {
         break
     
 }
-squres[pacmanCurrentIndex].classList.add('pac-man')
+squares[pacmanCurrentIndex].classList.add('pac-man')
 }
 
 document.addEventListener('keyup',movePacman)
