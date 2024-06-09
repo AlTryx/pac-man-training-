@@ -140,8 +140,79 @@ switch (e.key) {
     
 }
 squares[pacmanCurrentIndex].classList.add('pac-man')
+pacDotEaten()
+// powerPelletEaten()
+// checkForGameOver()
+// checkForWin()
 }
 
 document.addEventListener('keyup',movePacman)
+
+//what happens when you eat a pac-dot
+function pacDotEaten() {
+    if(squares[pacmanCurrentIndex].classList.contains('pac-dot')) {
+        score++
+        scoreDisplay.innerHTML = score
+        squares[pacmanCurrentIndex].classList.remove('pac-dot')
+    }
+}
+
+//what happens when you eat a power-pellet
+function powerPelletEaten() {
+    if(squares[pacmanCurrentIndex].classList.contains('power-pellet')) {
+        score+= 10
+        scoreDisplay.innerHTML = scoresquares[pacmanCurrentIndex].classList.remove('power-pellet')
+    }
+}
+
+//create ghosts using Constructor
+class Ghost {
+    constructor(className, startIndex, speed) {
+        this.className = className
+        this.startIndex = startIndex
+        this.speed = speed
+        this.currentIndex = startIndex
+        this.isScared = false
+        this.timerId = NaN
+    }
+}
+
+
+//all my ghosts
+ghosts = [
+    new Ghost ('blinky', 348, 250),
+    new Ghost('pinky', 376, 400),
+    new Ghost('inky',351, 300),
+    new Ghost('clyde',379, 500)
+]
+
+// draw my ghosts onto the grid
+ghosts.forEach(ghost => {
+    squares[ghost.currentIndex].classlist.add(ghost.className)
+    squares[ghost.currentIndex].classlist.add('ghost')
+})
+
+// move ghosts randomly
+ghosts.forEach(ghost => moveGhost())
+
+function moveGhost(ghost) {
+    const directions = [-1, 1, width, -width]
+    const direction = directions[Math.floor(Math.random() * directions.length)]
+
+    ghost.timerId = setInnterval(function() {
+        //if next square your ghost is going to go to doesn't have a ghost and wall
+        if(
+            !squares[ghost.currentIndex + direction].classList.contains('wall') &&
+            !squares[ghost.currentIndex + direction].classList.contains('ghost')
+        ) {
+            squares[ghost.currentIndex].classList.remove(ghost.className, 'ghost')
+            ghost.currentIndex += direction
+            squares[ghost.currentIndex].classList.add(ghost.className, 'ghost')
+        }
+        
+    }, ghost.speed)
+}
+
+
 
 })
