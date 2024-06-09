@@ -90,6 +90,7 @@ function movePacman(e) {
 squares[pacmanCurrentIndex].classList.remove('pac-man')
 
 switch (e.key) {
+
     case 'ArrowLeft':
         if(
             pacmanCurrentIndex % width !==0 && 
@@ -102,6 +103,7 @@ switch (e.key) {
             pacmanCurrentIndex = 391
         }
          break
+
     case 'ArrowRight' :
         if(
             pacmanCurrentIndex % width < width - 1 && 
@@ -110,12 +112,30 @@ switch (e.key) {
         ) {
             (pacmanCurrentIndex+=1)
         }
+        if(
+            squares[pacmanCurrentIndex +1] === squares[392] 
+        ) {
+            pacmanCurrentIndex = 364
+        }
         break
+
     case 'ArrowUp' :
-        (pacmanCurrentIndex-= width)
+        if(pacmanCurrentIndex - width >= 0 &&
+            !squares[pacmanCurrentInde - width].classList.contains('wall') &&
+            !squares[pacmanCurrentIndex - width].classList.contains('ghost-lair')
+        ) {
+            (pacmanCurrentIndex-= width)
+        }
         break
+
     case 'ArrowDown' :
-        (pacmanCurrentIndex+= width)
+        if(pacmanCurrentIndex + width < width * width &&
+            squares[pacmanCurrentIndex + width].classList.contains('wall') &&
+            squares[pacmanCurrentIndex + width].classList.contains('ghost-lair')
+        ) {
+            (pacmanCurrentIndex+= width)
+        }
+        
         break
     
 }
